@@ -12,7 +12,11 @@
     margin: 5px;
 }
 
-.current-weather img{
+.name-image img{
     width: 50px;
     height: 50px;
+}
+
+.name-image{
+    margin: 1px;
 }

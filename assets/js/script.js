@@ -5,6 +5,7 @@ var currentDate = "";
 var cityName = "";
 var uvValue = "";
 
+//search button click
 $("#search-btn").click(function(){
     
     cityName = $("#search-city").val().trim();
@@ -12,6 +13,7 @@ $("#search-btn").click(function(){
 
 });
 
+//current weather conditions API call
 function currentWeather(city){
     
     fetch(apiUrl+`?q=${city}&units=${units}&appid=${apiKey}`)
@@ -20,23 +22,52 @@ function currentWeather(city){
             }) 
             .then(function(data){
               console.log(data);
-              getWeatherDetails(data);
+              geoCordinates(city,data);
             })
 
 }
 
-function getWeatherDetails(info){
+
+//display current weather conditions
+function getWeatherDetails(city,cInfo,gInfo){
+    var cityDate = gInfo.date_iso;
+    console.log(cityDate);
+    currentDate = cityDate.split("T")[0];
+    console.log(currentDate);
+
+    
+    $(".name-image").append(
+        `
+        <h3>${cityName}</h3>
+        <img src=http://openweathermap.org/img/wn/${cInfo.weather[0].icon}@2x.png>
+        `
+    )
     
     $(".current-weather").append(
         `
         <p>Date: ${currentDate} </p>        
-        <p>Temperature: ${info.main.temp}&#8457</p>
-        <p>Humidity: ${info.main.humidity} %</p>
-        <p>Wind Speed: ${info.wind.speed} MPH</p>
+        <p>Temperature: ${cInfo.main.temp}&#8457</p>
+        <p>Humidity: ${cInfo.main.humidity} %</p>
+        <p>Wind Speed: ${cInfo.wind.speed} MPH</p>
        
 
         `
     )
 }
 
- 
+function geoCordinates(cityN,cData){
+    console.log(cityN);
+    var latitude = cData.coord.lat;
+    var longitude = cData.coord.lon;
+    var api = `http://api.openweathermap.org/data/2.5/uvi?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
+
+    fetch(api).then(function(response){
+        return response.json()
+        })
+        .then(function(data){
+            console.log("uv",data);
+            getWeatherDetails(cityN,cData,data);
+        })
+
+
+}
