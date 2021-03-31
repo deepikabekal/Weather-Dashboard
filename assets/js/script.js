@@ -7,7 +7,7 @@ var uvValue = "";
 
 //search button click
 $("#search-btn").click(function(){
-    
+    $(".current-weather").empty();
     cityName = $("#search-city").val().trim();
     currentWeather(cityName);
 
@@ -35,6 +35,12 @@ function getWeatherDetails(city,cInfo,gInfo){
     currentDate = cityDate.split("T")[0];
     console.log(currentDate);
     var uvIndex = gInfo.value;
+
+    $(".current-weather").append(
+        `
+        <div class="row name-image"></div>
+        `
+    )
     
     $(".name-image").append(
         `
