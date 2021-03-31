@@ -34,7 +34,7 @@ function getWeatherDetails(city,cInfo,gInfo){
     console.log(cityDate);
     currentDate = cityDate.split("T")[0];
     console.log(currentDate);
-
+    var uvIndex = gInfo.value;
     
     $(".name-image").append(
         `
@@ -49,10 +49,10 @@ function getWeatherDetails(city,cInfo,gInfo){
         <p>Temperature: ${cInfo.main.temp}&#8457</p>
         <p>Humidity: ${cInfo.main.humidity} %</p>
         <p>Wind Speed: ${cInfo.wind.speed} MPH</p>
-       
-
+        <p>UV Index: <span id="uv-color">${uvIndex}</span><p>
         `
     )
+        uvIndexColor(uvIndex);
 }
 
 function geoCordinates(cityN,cData){
@@ -70,4 +70,16 @@ function geoCordinates(cityN,cData){
         })
 
 
+}
+
+function uvIndexColor(index){
+
+    if (index=>0 && index<=3){
+        $("#uv-color").attr("class","favourable");
+    } else if (index>3 && index<=7){
+        $("#uv-color").attr("class","moderate")
+    } else {
+        $("#uv-color").attr("class","severe")
+
+    }
 }
