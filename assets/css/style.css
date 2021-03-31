@@ -20,3 +20,24 @@
 .name-image{
     margin: 1px;
 }
+/* uv index style */
+#uv-color{
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    border-radius: 20%;
+    text-align: center;
+}
+/* uv index color coding */
+
+.favourable{
+    background-color: rgb(130, 233, 130);
+}
+
+.moderate{
+    background-color: orange;
+}
+
+.severe{
+    background-color: rgb(236, 68, 68);
+}

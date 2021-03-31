@@ -73,10 +73,10 @@ function geoCordinates(cityN,cData){
 }
 
 function uvIndexColor(index){
-
-    if (index=>0 && index<=3){
+    console.log("index",index);
+    if (index>=0 && index<=3){
         $("#uv-color").attr("class","favourable");
-    } else if (index>3 && index<=7){
+    } else if (index>3 &&  index <=7){
         $("#uv-color").attr("class","moderate")
     } else {
         $("#uv-color").attr("class","severe")
