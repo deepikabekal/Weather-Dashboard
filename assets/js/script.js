@@ -27,14 +27,31 @@ function currentWeather(city){
 
 }
 
+function geoCordinates(cityN,currentData){
+    console.log(cityN);
+    var latitude = currentData.coord.lat;
+    var longitude = currentData.coord.lon;
+    var api = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=${units}&exclude=minutely,hourly&appid=${apiKey}`
+
+    fetch(api).then(function(response){
+        return response.json()
+        })
+        .then(function(data){
+            console.log("uv",data);
+            getWeatherDetails(cityN,data);
+        })
+
+
+}
+
 
 //display current weather conditions
-function getWeatherDetails(city,cInfo,gInfo){
-    var cityDate = gInfo.date_iso;
-    console.log(cityDate);
-    currentDate = cityDate.split("T")[0];
+function getWeatherDetails(city,info){
+    var unixTimeStamp = info.current.dt;
+    var fullDate = new Date(unixTimeStamp*1000)
+    var currentDate = dayjs(fullDate).format("DD/MM/YYYY") ;
     console.log(currentDate);
-    var uvIndex = gInfo.value;
+    var uvIndex = info.current.uvi;
 
     $(".current-weather").append(
         `
@@ -44,39 +61,24 @@ function getWeatherDetails(city,cInfo,gInfo){
     
     $(".name-image").append(
         `
-        <h3>${cityName}</h3>
-        <img src=http://openweathermap.org/img/wn/${cInfo.weather[0].icon}@2x.png>
+        <h3>${city}</h3>
+        <img src=http://openweathermap.org/img/wn/${info.current.weather[0].icon}@2x.png>
         `
     )
     
     $(".current-weather").append(
         `
         <p>Date: ${currentDate} </p>        
-        <p>Temperature: ${cInfo.main.temp}&#8457</p>
-        <p>Humidity: ${cInfo.main.humidity} %</p>
-        <p>Wind Speed: ${cInfo.wind.speed} MPH</p>
+        <p>Temperature: ${info.current.temp}&#8457</p>
+        <p>Humidity: ${info.current.humidity} %</p>
+        <p>Wind Speed: ${info.current.wind_speed} MPH</p>
         <p>UV Index: <span id="uv-color">${uvIndex}</span><p>
         `
     )
         uvIndexColor(uvIndex);
 }
 
-function geoCordinates(cityN,cData){
-    console.log(cityN);
-    var latitude = cData.coord.lat;
-    var longitude = cData.coord.lon;
-    var api = `http://api.openweathermap.org/data/2.5/uvi?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
 
-    fetch(api).then(function(response){
-        return response.json()
-        })
-        .then(function(data){
-            console.log("uv",data);
-            getWeatherDetails(cityN,cData,data);
-        })
-
-
-}
 
 function uvIndexColor(index){
     console.log("index",index);
@@ -89,3 +91,4 @@ function uvIndexColor(index){
 
     }
 }
+
