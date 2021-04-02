@@ -7,6 +7,7 @@ var saveWeather = []; //array to save the searched city and its geo coordinates.
 $("#search-btn").click(function(){
     $(".current-weather").empty();
     $(".forecast-container").empty();
+    $(".search-history").empty();
     $("#error-display").empty();
     cityName = $("#search-city").val().trim();
     currentWeather(cityName);
@@ -68,6 +69,8 @@ function getWeatherDetails(city,info){
     //get the uv index value
     var uvIndex = info.current.uvi;
 
+    // var cityNameFormat = city[0].toUpperCase()+city.splice(0,1).toLowerCase();
+    // console.log(cityNameFormat);
 
     //create a div to display city name and icon
     $(".current-weather").append(
@@ -78,7 +81,7 @@ function getWeatherDetails(city,info){
     
     $(".name-image").append(
         `
-        <h3>${city}</h3>
+        <h3>${city.toUpperCase()}</h3>
         <img src=http://openweathermap.org/img/wn/${info.current.weather[0].icon}@2x.png>
         `
     )
@@ -152,7 +155,17 @@ function searchHistory(city,lat,lon){
     //save the data in object variable
     var savedObject = {cityName:city, latitude:lat, longitude:lon};
     console.log("savedobject", savedObject);   
-        
+    
+    if(saveWeather!==[]){
+        for (var i=0;i<saveWeather.length;i++){
+            if (city===saveWeather[i].cityName){
+                
+                saveWeather.splice(i,1);
+            }
+        }
+
+    }
+    
     
     //push the object to the array
     saveWeather.push(savedObject);
@@ -167,11 +180,12 @@ function searchHistory(city,lat,lon){
 
 function displaySearchCity(savedData){
     //saveWeather = JSON.parse(localStorage.getItem("weatherDashboard"))||[];
+    //debugger;
     
     for(var i=0;i<savedData.length;i++){
         $(".search-history").append(
             `
-            <button>${savedData[i].cityName}</button>
+            <button id="city-${i}">${savedData[i].cityName}</button>
             `
         )
 
@@ -183,6 +197,9 @@ function displaySearchCity(savedData){
 $(".search-history").on("click", "button", function(){
     $(".current-weather").empty();
     $(".forecast-container").empty();
+    $(".search-history").empty();
+    $("#error-display").empty();
+    $("#search-city").val("");
     var savedCity = $(this).text().trim();
     console.log("clicked city= ",savedCity);
     currentWeather(savedCity);
