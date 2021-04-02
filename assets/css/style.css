@@ -42,3 +42,12 @@
 .severe{
     background-color: rgb(236, 68, 68);
 }
+/* 5 day forecast style */
+.forecast-container{
+    justify-content: space-evenly;
+}
+.daily-container{
+    background-color: rgb(90, 90, 253);
+    border-radius: 10%;
+    
+}
