@@ -51,9 +51,9 @@ function geoCordinates(cityN,currentData){
             fiveDayForecast(cityN,data);
             searchHistory(cityN,latitude,longitude);
         })
-        // .catch (function(error){
-        //     $("#error-display").text("Something went wrong. Refresh your page and try again");
-        // })
+         .catch (function(error){
+            $("#error-display").text("Something went wrong. Refresh your page and try again");
+         })
 
 
 }
