@@ -143,6 +143,7 @@ function searchHistory(city,lat,lon){
     //check if the city name is already saved in the local storage
     for (var i=0;i<saveWeather.length;i++){
         if (city===saveWeather[i].cityName){
+            displaySearchCity(saveWeather);
             return;
         }
     }
@@ -157,6 +158,21 @@ function searchHistory(city,lat,lon){
 
     //save the array in local storage
     localStorage.setItem("weatherDashboard",JSON.stringify(saveWeather));
+    displaySearchCity(saveWeather);
+    
+}
 
+function displaySearchCity(savedData){
+    //saveWeather = JSON.parse(localStorage.getItem("weatherDashboard"))||[];
+    
+    for(var i=0;i<savedData.length;i++){
+        $(".search-history").append(
+            `
+            <button>${savedData[i].cityName}</button>
+            `
+        )
+
+
+    }
     
 }
