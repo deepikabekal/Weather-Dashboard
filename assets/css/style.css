@@ -53,15 +53,16 @@
 }
 
 /* search history styles */
-.search-history{
+.search-history, #clear-history{
     display: flex;
     flex-direction: column;
     
 }
 
-.search-history button{
+.search-history button {
     margin: 5px;
     border-radius: 10%;
     background-color: white;
     border: none;
 }
+

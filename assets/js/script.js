@@ -206,3 +206,9 @@ $(".search-history").on("click", "button", function(){
     currentWeather(savedCity);
 });
 
+$("#clear-btn").click(function(){
+    $(".search-history").empty();
+    $("#error-display").empty();
+    $("#search-city").val("");
+    localStorage.clear();
+})
