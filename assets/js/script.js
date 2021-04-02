@@ -124,3 +124,8 @@ function fiveDayForecast(city, info){
     }
 }
 
+function searchHistory(city,lat,lon){
+    var storage = JSON.parse(localStorage.getItem("weatherDashboard"))||[];
+
+    
+}
