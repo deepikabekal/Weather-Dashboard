@@ -1,7 +1,7 @@
-var apiKey = "9734ad0baca8a3d2db8c9b1ab54c7751";
-var apiUrl = `https://api.openweathermap.org/data/2.5/weather`
-var units = "metric";
-var searchValues = [];
+var apiKey = "9734ad0baca8a3d2db8c9b1ab54c7751"; //apikey
+var apiUrl = `https://api.openweathermap.org/data/2.5/weather` //api url
+var units = "metric"; // to get the data in desired unit 
+var saveWeather = []; //array to save the searched city and its geo coordinates.
 
 //search button click
 $("#search-btn").click(function(){
@@ -12,7 +12,7 @@ $("#search-btn").click(function(){
 
 });
 
-//current weather conditions API call
+//function to create an api call to get city name.
 function currentWeather(city){
     
     fetch(apiUrl+`?q=${city}&units=${units}&appid=${apiKey}`)
@@ -26,6 +26,7 @@ function currentWeather(city){
 
 }
 
+//function to create an api call to get the weather datails
 function geoCordinates(cityN,currentData){
     console.log(cityN);
     var latitude = currentData.coord.lat;
@@ -41,6 +42,7 @@ function geoCordinates(cityN,currentData){
             console.log("uv",data);
             getWeatherDetails(cityN,data);
             fiveDayForecast(cityN,data);
+            searchHistory(cityN,latitude,longitude);
         })
 
 
@@ -49,13 +51,18 @@ function geoCordinates(cityN,currentData){
 
 //display current weather conditions
 function getWeatherDetails(city,info){
+    //get the unix time stamp from the api data and convert it date format
     var unixTimeStamp = info.current.dt;
     // var fullDate = new Date(unixTimeStamp*1000)
     // var currentDate = dayjs(fullDate).format("DD/MM/YYYY") ;
     var currentDate = dayjs.unix(unixTimeStamp).format("DD/MM/YYYY")
     console.log(currentDate);
+
+    //get the uv index value
     var uvIndex = info.current.uvi;
 
+
+    //create a div to display city name and icon
     $(".current-weather").append(
         `
         <div class="row name-image"></div>
@@ -69,6 +76,7 @@ function getWeatherDetails(city,info){
         `
     )
     
+    //display the other weather details on the page
     $(".current-weather").append(
         `
         <p>Date: ${currentDate} </p>        
@@ -77,12 +85,13 @@ function getWeatherDetails(city,info){
         <p>Wind Speed: ${info.current.wind_speed} MPH</p>
         <p>UV Index: <span id="uv-color">${uvIndex}</span><p>
         `
-    )
-        uvIndexColor(uvIndex);
+    )   
+    //call the function to display the color the uv index
+    uvIndexColor(uvIndex);
 }
 
 
-
+//color the uv index based on the weather conditions
 function uvIndexColor(index){
     console.log("index",index);
     if (index>=0 && index<=3){
@@ -95,24 +104,26 @@ function uvIndexColor(index){
     }
 }
 
+//function to display the 5 day weather forecast
 function fiveDayForecast(city, info){
-   
+   //get and display the weather data for a 5 day period
     for(var i=1;i<6;i++){
         
-        var unixTime = info.daily[i].dt
-        var dailyDate = dayjs.unix(unixTime).format("DD/MM/YYYY");
+        var unixTime = info.daily[i].dt; //get the unix time stamp from the api data
+        var dailyDate = dayjs.unix(unixTime).format("DD/MM/YYYY"); //change the unix time stamp to date format
         console.log(dailyDate);
-        var dailyIcon = info.daily[i].weather[0].icon;
-        var dailyTemp = info.daily[i].temp.day;
-        var dailyHumidity = info.daily[i].humidity;
+        var dailyIcon = info.daily[i].weather[0].icon;//get the waether condition icon
+        var dailyTemp = info.daily[i].temp.day; //get the temperature of the day
+        var dailyHumidity = info.daily[i].humidity; //get the humidity of the day
 
+        //create container for each day and append to the main container
         $(".forecast-container").append(
             `
             <div class="col-sm-2 daily-container ${i}"></div>
                        
             `
         )
-        
+        //display the stored weather data
         $(`.${i}`).append(
             `
             <h6>${dailyDate}</h6>
@@ -124,8 +135,3 @@ function fiveDayForecast(city, info){
     }
 }
 
-function searchHistory(city,lat,lon){
-    var storage = JSON.parse(localStorage.getItem("weatherDashboard"))||[];
-
-    
-}
