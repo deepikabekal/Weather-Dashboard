@@ -23,6 +23,7 @@ function currentWeather(city){
               console.log(data);
               geoCordinates(city,data);
             })
+            
 
 }
 
@@ -136,28 +137,24 @@ function fiveDayForecast(city, info){
 }
 
 function searchHistory(city,lat,lon){
+    
+    console.log("hello");
     //get the stored values
     saveWeather = JSON.parse(localStorage.getItem("weatherDashboard"))||[];
     console.log("save weather",saveWeather);
 
-    //check if the city name is already saved in the local storage
-    for (var i=0;i<saveWeather.length;i++){
-        if (city===saveWeather[i].cityName){
-            displaySearchCity(saveWeather);
-            return;
-        }
-    }
-    
     //save the data in object variable
     var savedObject = {cityName:city, latitude:lat, longitude:lon};
-    console.log("savedobject", savedObject);
-
+    console.log("savedobject", savedObject);   
+        
+    
     //push the object to the array
     saveWeather.push(savedObject);
     console.log("last save weather",saveWeather);
 
     //save the array in local storage
     localStorage.setItem("weatherDashboard",JSON.stringify(saveWeather));
+    
     displaySearchCity(saveWeather);
     
 }
@@ -172,7 +169,16 @@ function displaySearchCity(savedData){
             `
         )
 
-
     }
     
 }
+
+
+$(".search-history").on("click", "button", function(){
+    $(".current-weather").empty();
+    $(".forecast-container").empty();
+    var savedCity = $(this).text().trim();
+    console.log("clicked city= ",savedCity);
+    currentWeather(savedCity);
+});
+
