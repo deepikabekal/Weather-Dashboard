@@ -7,6 +7,7 @@ var saveWeather = []; //array to save the searched city and its geo coordinates.
 $("#search-btn").click(function(){
     $(".current-weather").empty();
     $(".forecast-container").empty();
+    $("#error-display").empty();
     cityName = $("#search-city").val().trim();
     currentWeather(cityName);
 
@@ -23,7 +24,9 @@ function currentWeather(city){
               console.log(data);
               geoCordinates(city,data);
             })
-            
+            .catch (function (error){
+                $("#error-display").text("Sorry! There is no data for the city you entered. Please try again with a different city name.");
+            })
 
 }
 
@@ -44,6 +47,9 @@ function geoCordinates(cityN,currentData){
             getWeatherDetails(cityN,data);
             fiveDayForecast(cityN,data);
             searchHistory(cityN,latitude,longitude);
+        })
+        .catch (function(error){
+            $("#error-display").text("Something went wrong. Refresh your page and try again");
         })
 
 
