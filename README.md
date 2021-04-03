@@ -24,7 +24,7 @@ https://deepikabekal.github.io/Weather-Dashboard/.
 * Google fonts (https://developers.google.com/fonts)
 * day.js (https://day.js.org/)
 
-# API used
+## API used
 OpenWeather One Call API (https://openweathermap.org/api)
 
 ## Contact Info
