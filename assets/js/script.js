@@ -146,7 +146,7 @@ function fiveDayForecast(city, info){
 
 function searchHistory(city,lat,lon){
     
-    console.log("hello");
+    //console.log("hello");
     //get the stored values
     saveWeather = JSON.parse(localStorage.getItem("weatherDashboard"))||[];
     console.log("save weather",saveWeather);
