@@ -139,7 +139,7 @@ function fiveDayForecast(city, info){
             `
             <h6>${dailyDate}</h6>
             <img src=http://openweathermap.org/img/wn/${dailyIcon}@2x.png>
-            <p>Temp: ${dailyTemp}</p>
+            <p>Temp: ${dailyTemp}&#8451</p>
             <p>Wind:${windSpeed}MPH</p>
             <p>Humidity: ${dailyHumidity} </p>
             `
