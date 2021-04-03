@@ -59,47 +59,47 @@ THEN I am again presented with current and future conditions for that city.
      * Pass the city name and the data from the API call as parameter to another function (to get geo coordinates of the city)
      * Add a catch statement to to display a message, if the user enters wrong city name.
 * A function for One Call API call.
-      * Takes the city name and data as the parameter.
-      * Using the API data get latitude and longitude of the city.
-      * Make the API call using the latitude, longitudeand units as the query parameters along with api key.
-      * Call a function to get the current weather details. Pass city name and data as parameters.
-      * Call a function to get 5-day forecast details. Pass city name and data as parameters.
-      * Call a function to save the search history in local storage. Pass city name, latitude and longitude as parameters.
-      * Add a catch statement to display a message if there is an error.
+     * Takes the city name and data as the parameter.
+     * Using the API data get latitude and longitude of the city.
+     * Make the API call using the latitude, longitudeand units as the query parameters along with api key.
+     * Call a function to get the current weather details. Pass city name and data as parameters.
+     * Call a function to get 5-day forecast details. Pass city name and data as parameters.
+     * Call a function to save the search history in local storage. Pass city name, latitude and longitude as parameters.
+     * Add a catch statement to display a message if there is an error.
 * A function to get the current weather details. 
-      * Takes the city name and API data as arguments.
-      * Convert the unix timestamp(format in which the date is stored in the API) to date format.
-      * Get and display the weather information.
-      * Call a function to display appropriate color for UV Index
+     * Takes the city name and API data as arguments.
+     * Convert the unix timestamp(format in which the date is stored in the API) to date format.
+     * Get and display the weather information.
+     * Call a function to display appropriate color for UV Index
 * A function to display the appropriate color for UV Index.
-      * Takes the UV index as argument.
-      * If statement to check in what range the UV Index is.
-            * 0-3, favourable condition, Green
-            * 3-7, moderate condition, Orange
-            * More than 7, severe condition, Red
+     * Takes the UV index as argument.
+     * If statement to check in what range the UV Index is.
+        * 0-3, favourable condition, Green
+        * 3-7, moderate condition, Orange
+        * More than 7, severe condition, Red
 * A function to display 5 day weather forecast 
-      * Takes the city name and API data as arguments.
-      * Get and display the weather information for the next 5 days using for loop.
+     * Takes the city name and API data as arguments.
+     * Get and display the weather information for the next 5 days using for loop.
 * A function to save the search history in local storage.
-      * Takes city name, lattitude and longitude as arguments.
-      * Get the data stored in the local storage and save it in an array. 
-      * In an object variable save the city name, latitude and longitude. 
-      * If the local storage is not empty then using for loop check if the city name is already exists in the array. 
-            * If yes then remove the existing city entry from the array.
-      * Push the object in to the array.
-      * Save the array in the local storage. 
-      * Call a function to display the search history. Pass array as parameter.
+     * Takes city name, lattitude and longitude as arguments.
+     * Get the data stored in the local storage and save it in an array. 
+     * In an object variable save the city name, latitude and longitude. 
+     * If the local storage is not empty then using for loop check if the city name is already exists in the array. 
+        * If yes then remove the existing city entry from the array.
+     * Push the object in to the array.
+     * Save the array in the local storage. 
+     * Call a function to display the search history. Pass array as parameter.
 * A function to display the search history. 
-      * Takes array as argument. 
-      * Using for loop display the city name in the array on the page as button.
+     * Takes array as argument. 
+     * Using for loop display the city name in the array on the page as button.
 * An event listerner for parent element of the city name buttons.
-      * In the call back function
-          * Clear containers for current weather, 5 day forecast, search history and error message display. 
-          * Get the city name on the button.
-          * Call a function to display current weather and pass the city name as parameter. 
+     * In the call back function
+        * Clear containers for current weather, 5 day forecast, search history and error message display. 
+        * Get the city name on the button.
+        * Call a function to display current weather and pass the city name as parameter. 
 * An event listener for clear search history button with a call back function.
-      * Clear containers for search history, error message display.
-      * Clear local storage.
+     * Clear containers for search history, error message display.
+     * Clear local storage.
 
 
 ## References
