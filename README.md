@@ -55,9 +55,9 @@ THEN I am again presented with current and future conditions for that city.
 ## Code logic
 * Get the city name the user entered in the event listener call back function for the search button.
 * Pass the city name as a parameter to a function.
-      * Make an API call with city name and units (for getting the data in the correct units) as the query parameter along with the API key.
-      * Pass the city name and the data from the API call as parameter to another function (to get geo coordinates of the city)
-      * Add a catch statement to to display a message, if the user enters wrong city name.
+     * Make an API call with city name and units (for getting the data in the correct units) as the query parameter along with the API key.
+     * Pass the city name and the data from the API call as parameter to another function (to get geo coordinates of the city)
+     * Add a catch statement to to display a message, if the user enters wrong city name.
 * A function for One Call API call.
       * Takes the city name and data as the parameter.
       * Using the API data get latitude and longitude of the city.
