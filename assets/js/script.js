@@ -123,7 +123,9 @@ function fiveDayForecast(city, info){
         console.log(dailyDate);
         var dailyIcon = info.daily[i].weather[0].icon;//get the waether condition icon
         var dailyTemp = info.daily[i].temp.day; //get the temperature of the day
+        var windSpeed = info.daily[i].wind_speed; //get the wind speed
         var dailyHumidity = info.daily[i].humidity; //get the humidity of the day
+
 
         //create container for each day and append to the main container
         $(".forecast-container").append(
@@ -138,7 +140,8 @@ function fiveDayForecast(city, info){
             <h6>${dailyDate}</h6>
             <img src=http://openweathermap.org/img/wn/${dailyIcon}@2x.png>
             <p>Temp: ${dailyTemp}</p>
-            <p>Humidity: ${dailyHumidity} 
+            <p>Wind:${windSpeed}MPH</p>
+            <p>Humidity: ${dailyHumidity} </p>
             `
         )
     }
